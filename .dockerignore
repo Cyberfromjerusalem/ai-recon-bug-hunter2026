@@ -7,3 +7,7 @@ results/*
 README.md
 .DS_Store
 *.log
+.env
+.vscode
+.idea
+*.tmp
