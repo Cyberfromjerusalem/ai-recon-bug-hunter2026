@@ -1,13 +1,12 @@
 {
   "name": "ai-recon-pro",
   "version": "2.0.0",
-  "description": "Professional AI-Powered Reconnaissance Tool with Smart Grep",
+  "description": "Professional AI-Powered Reconnaissance Tool",
   "main": "api/smart-recon-workflow.js",
   "scripts": {
     "start": "node api/smart-recon-workflow.js",
     "dev": "nodemon api/smart-recon-workflow.js",
-    "docker:build": "docker build -t ai-recon-pro .",
-    "docker:run": "docker run -p 3000:3000 -v $(pwd)/workspace:/app/workspace -v $(pwd)/results:/app/results ai-recon-pro"
+    "vercel-build": "echo \"Hello\""
   },
   "dependencies": {
     "express": "^4.18.2",
@@ -18,8 +17,5 @@
   },
   "engines": {
     "node": "18.x"
-  },
-  "keywords": ["reconnaissance", "bug-bounty", "security", "subfinder", "httpx", "katana"],
-  "author": "Your Name",
-  "license": "MIT"
+  }
 }
