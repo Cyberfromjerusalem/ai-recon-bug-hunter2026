@@ -3,8 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🔍 SMART RECON - Instant Results</title>
+    <title>⚡ RECON PRO - 3-Step Smart Reconnaissance</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap');
+        
         * {
             margin: 0;
             padding: 0;
@@ -12,170 +14,381 @@
         }
 
         body {
-            background: #0d1117;
-            color: #c9d1d9;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: 'Inter', sans-serif;
+            min-height: 100vh;
             padding: 20px;
         }
 
         .container {
-            max-width: 1400px;
+            max-width: 1600px;
             margin: 0 auto;
         }
 
+        /* Header */
         .header {
-            background: #161b22;
-            border: 1px solid #30363d;
-            border-radius: 6px;
-            padding: 20px;
-            margin-bottom: 20px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 25px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
         }
 
         .header h1 {
-            font-size: 24px;
-            color: #58a6ff;
+            font-size: 32px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
             margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
+        .header h1 span {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            font-size: 14px;
+            padding: 4px 12px;
+            border-radius: 20px;
+            -webkit-text-fill-color: white;
+        }
+
+        .header p {
+            color: #666;
+            font-size: 16px;
+            line-height: 1.6;
+        }
+
+        .workflow-badges {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .workflow-badge {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 30px;
+            font-size: 14px;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .workflow-badge.step1 { background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); }
+        .workflow-badge.step2 { background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%); }
+        .workflow-badge.step3 { background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); }
+
+        /* Scan Panel */
         .scan-panel {
-            background: #161b22;
-            border: 1px solid #30363d;
-            border-radius: 6px;
-            padding: 20px;
-            margin-bottom: 20px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 25px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
         }
 
         .input-group {
             display: flex;
-            gap: 10px;
-        }
-
-        .input-group input {
-            flex: 1;
-            background: #0d1117;
-            border: 1px solid #30363d;
-            color: #c9d1d9;
-            padding: 12px 15px;
-            font-size: 16px;
-            border-radius: 6px;
-        }
-
-        .input-group input:focus {
-            outline: none;
-            border-color: #58a6ff;
-        }
-
-        .input-group button {
-            background: #238636;
-            border: none;
-            color: white;
-            padding: 12px 30px;
-            font-size: 16px;
-            font-weight: 600;
-            border-radius: 6px;
-            cursor: pointer;
-        }
-
-        .input-group button:hover {
-            background: #2ea043;
-        }
-
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
             gap: 15px;
             margin-bottom: 20px;
         }
 
+        .input-group input {
+            flex: 1;
+            background: white;
+            border: 2px solid #e0e0e0;
+            color: #333;
+            padding: 15px 20px;
+            font-size: 16px;
+            border-radius: 12px;
+            font-family: 'Fira Code', monospace;
+            transition: all 0.3s;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .input-group button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border: none;
+            color: white;
+            padding: 15px 40px;
+            font-size: 16px;
+            font-weight: 600;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        .input-group button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 30px rgba(102, 126, 234, 0.4);
+        }
+
+        .input-group button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* Step Progress */
+        .steps-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+
+        .step-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s;
+        }
+
+        .step-card.active {
+            transform: scale(1.02);
+            box-shadow: 0 20px 40px rgba(102, 126, 234, 0.3);
+            border: 2px solid #667eea;
+        }
+
+        .step-card.completed {
+            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+            color: white;
+        }
+
+        .step-number {
+            font-size: 14px;
+            font-weight: 600;
+            color: #667eea;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .step-card.completed .step-number {
+            color: white;
+        }
+
+        .step-title {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .step-command {
+            background: #f5f5f5;
+            padding: 10px 15px;
+            border-radius: 10px;
+            font-family: 'Fira Code', monospace;
+            font-size: 13px;
+            color: #333;
+            margin: 15px 0;
+            border-left: 3px solid #667eea;
+        }
+
+        .step-card.completed .step-command {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border-left-color: white;
+        }
+
+        .step-stats {
+            display: flex;
+            justify-content: space-between;
+            color: #666;
+            font-size: 14px;
+            margin-top: 15px;
+        }
+
+        .step-card.completed .step-stats {
+            color: white;
+        }
+
+        .stat-highlight {
+            font-weight: 700;
+            color: #667eea;
+        }
+
+        .step-card.completed .stat-highlight {
+            color: white;
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+
         .stat-card {
-            background: #161b22;
-            border: 1px solid #30363d;
-            border-radius: 6px;
-            padding: 20px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
             text-align: center;
         }
 
-        .stat-card.critical {
-            border-color: #f85149;
+        .stat-icon {
+            font-size: 32px;
+            margin-bottom: 10px;
         }
 
         .stat-value {
             font-size: 36px;
-            font-weight: 600;
-            color: #58a6ff;
-            margin-bottom: 5px;
-        }
-
-        .stat-card.critical .stat-value {
-            color: #f85149;
+            font-weight: 700;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1.2;
         }
 
         .stat-label {
-            color: #8b949e;
-            font-size: 12px;
+            color: #666;
+            font-size: 14px;
+            font-weight: 500;
             text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .stat-card.critical .stat-value {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Progress Bar */
+        .progress-container {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .progress-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .progress-bar {
+            height: 12px;
+            background: #e0e0e0;
+            border-radius: 6px;
+            overflow: hidden;
+            margin-bottom: 10px;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            width: 0%;
+            transition: width 0.3s;
+            border-radius: 6px;
+        }
+
+        .progress-status {
+            color: #666;
+            font-size: 14px;
+            font-family: 'Fira Code', monospace;
+        }
+
+        /* Tabs */
+        .tabs-container {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
         }
 
         .tabs {
             display: flex;
-            gap: 2px;
-            background: #161b22;
-            border: 1px solid #30363d;
-            border-radius: 6px;
-            padding: 4px;
+            gap: 10px;
             margin-bottom: 20px;
+            border-bottom: 2px solid #e0e0e0;
+            padding-bottom: 15px;
         }
 
         .tab {
-            flex: 1;
-            padding: 10px;
-            text-align: center;
+            padding: 10px 25px;
             cursor: pointer;
-            border-radius: 4px;
-            font-size: 13px;
-            color: #8b949e;
+            border-radius: 30px;
+            font-weight: 500;
+            transition: all 0.3s;
+            color: #666;
         }
 
         .tab:hover {
-            background: #1f2937;
+            background: #f5f5f5;
         }
 
         .tab.active {
-            background: #238636;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
         }
 
-        .panel {
-            background: #161b22;
-            border: 1px solid #30363d;
-            border-radius: 6px;
+        /* Results Panel */
+        .results-panel {
+            background: white;
+            border-radius: 15px;
             overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
         }
 
         .panel-header {
-            background: #0d1117;
-            padding: 15px 20px;
-            border-bottom: 1px solid #30363d;
+            background: #f8f9fa;
+            padding: 20px;
+            border-bottom: 1px solid #e0e0e0;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
 
         .panel-header h3 {
-            font-size: 16px;
+            font-size: 18px;
+            font-weight: 600;
+            color: #333;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
         .badge {
-            background: #238636;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
-            padding: 4px 10px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: 600;
+            padding: 5px 15px;
+            border-radius: 30px;
+            font-size: 14px;
+            font-weight: 500;
         }
 
         .badge.critical {
-            background: #f85149;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
         }
 
         .panel-content {
@@ -184,120 +397,283 @@
             padding: 15px;
         }
 
+        /* URL Items */
         .url-item {
-            padding: 12px 15px;
-            border-bottom: 1px solid #30363d;
-            font-size: 13px;
-            word-break: break-all;
+            background: #f8f9fa;
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 10px;
             cursor: pointer;
-            border-left: 3px solid transparent;
+            transition: all 0.2s;
+            border-left: 4px solid transparent;
         }
 
         .url-item:hover {
-            background: #1f2937;
+            background: white;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transform: translateX(5px);
         }
 
         .url-item.sensitive {
-            border-left-color: #f85149;
+            border-left-color: #f5576c;
         }
 
         .url-item.file {
-            border-left-color: #58a6ff;
+            border-left-color: #4facfe;
+        }
+
+        .url-item.js {
+            border-left-color: #f093fb;
         }
 
         .url-meta {
             display: flex;
-            gap: 10px;
-            margin-top: 5px;
-            color: #8b949e;
-            font-size: 11px;
+            gap: 15px;
+            margin-top: 10px;
+            font-size: 12px;
         }
 
         .url-tag {
-            background: #0d1117;
-            border: 1px solid #30363d;
-            padding: 2px 8px;
-            border-radius: 12px;
+            background: white;
+            padding: 3px 10px;
+            border-radius: 15px;
+            border: 1px solid #e0e0e0;
+            color: #666;
         }
 
+        .url-tag.highlight {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+        }
+
+        /* Secret Items */
         .secret-item {
-            background: #1f2937;
-            border: 1px solid #f85149;
-            border-radius: 4px;
-            padding: 12px;
+            background: linear-gradient(135deg, #fff5f5 0%, #fff0f0 100%);
+            border: 1px solid #f5576c;
+            border-radius: 10px;
+            padding: 15px;
             margin-bottom: 10px;
         }
 
         .secret-type {
             display: inline-block;
-            background: #f85149;
+            background: #f5576c;
             color: white;
-            padding: 2px 10px;
-            border-radius: 12px;
+            padding: 3px 12px;
+            border-radius: 15px;
             font-size: 11px;
-            margin-bottom: 8px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            text-transform: uppercase;
         }
 
         .secret-url {
-            color: #58a6ff;
+            color: #333;
+            font-family: 'Fira Code', monospace;
             font-size: 12px;
             word-break: break-all;
             cursor: pointer;
         }
 
         .secret-url:hover {
+            color: #667eea;
             text-decoration: underline;
+        }
+
+        /* Command Output */
+        .command-output {
+            background: #1e1e2f;
+            color: #00ff9d;
+            padding: 15px;
+            border-radius: 10px;
+            font-family: 'Fira Code', monospace;
+            font-size: 12px;
+            margin-top: 15px;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+
+        .command-line {
+            color: #ffaa00;
+            margin-bottom: 5px;
+        }
+
+        .command-result {
+            color: #00ff9d;
+            margin-left: 20px;
+            margin-bottom: 10px;
+        }
+
+        /* Animations */
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+
+        .loading {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            border: 2px solid #667eea;
+            border-top-color: transparent;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: #999;
+        }
+
+        .empty-state-icon {
+            font-size: 48px;
+            margin-bottom: 15px;
+            opacity: 0.5;
         }
     </style>
 </head>
 <body>
     <div class="container">
+        <!-- Header -->
         <div class="header">
-            <h1>🔍 SMART RECON - Instant Results</h1>
-            <div>Click SCAN to see results immediately</div>
-        </div>
-
-        <div class="scan-panel">
-            <div class="input-group">
-                <input type="text" id="domainInput" placeholder="Enter domain (e.g., example.com)" value="chime.com">
-                <button id="scanBtn">SCAN NOW</button>
+            <h1>
+                ⚡ RECON PRO - 3-Step Smart Reconnaissance
+                <span>v3.0</span>
+            </h1>
+            <p>Most bug hunters stop at URLs. Real impact comes from what those URLs expose.<br>
+            This workflow combines: high-risk file extensions + real-world secret patterns + automated URL discovery</p>
+            <div class="workflow-badges">
+                <div class="workflow-badge step1">📡 Step 1: Asset Discovery</div>
+                <div class="workflow-badge step2">🔗 Step 2: URL Extraction</div>
+                <div class="workflow-badge step3">🔍 Step 3: Smart Grep</div>
             </div>
         </div>
 
-        <div class="stats-grid" id="stats">
+        <!-- Scan Panel -->
+        <div class="scan-panel">
+            <div class="input-group">
+                <input type="text" id="domainInput" placeholder="Enter target domain (e.g., example.com)" value="example.com">
+                <button id="scanBtn">▶ START 3-STEP RECON</button>
+            </div>
+        </div>
+
+        <!-- Step Progress Cards -->
+        <div class="steps-container" id="stepsContainer">
+            <div class="step-card" id="step1">
+                <div class="step-number">STEP 01</div>
+                <div class="step-title">
+                    📡 Asset Discovery
+                    <span id="step1Status"></span>
+                </div>
+                <div class="step-command">subfinder -d example.com | httpx -mc 200,401,403,404</div>
+                <div class="step-stats">
+                    <span>🔍 <span id="step1Domains">0</span> domains found</span>
+                    <span>✅ <span id="step1Live">0</span> live</span>
+                </div>
+            </div>
+
+            <div class="step-card" id="step2">
+                <div class="step-number">STEP 02</div>
+                <div class="step-title">
+                    🔗 URL Extraction
+                    <span id="step2Status"></span>
+                </div>
+                <div class="step-command">cat domains.txt | katana | tee urls.txt</div>
+                <div class="step-stats">
+                    <span>🔗 <span id="step2Urls">0</span> URLs extracted</span>
+                </div>
+            </div>
+
+            <div class="step-card" id="step3">
+                <div class="step-number">STEP 03</div>
+                <div class="step-title">
+                    🔍 Smart Grep
+                    <span id="step3Status"></span>
+                </div>
+                <div class="step-command">grep -aiE "\.(zip|rar|tar|gz|config|log|bak|backup|java|old|xlsx|json|pdf|doc|docx|pptx|csv|htaccess|7z)$|(access_key|access_token|api_key|aws_secret)"</div>
+                <div class="step-stats">
+                    <span>📁 <span id="step3Files">0</span> sensitive files</span>
+                    <span>🔐 <span id="step3Secrets">0</span> secrets</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Stats Grid -->
+        <div class="stats-grid">
             <div class="stat-card">
-                <div class="stat-value" id="statUrls">0</div>
+                <div class="stat-icon">🌐</div>
+                <div class="stat-value" id="statTotalDomains">0</div>
+                <div class="stat-label">Total Domains</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">🔗</div>
+                <div class="stat-value" id="statTotalUrls">0</div>
                 <div class="stat-label">URLs Found</div>
             </div>
             <div class="stat-card critical">
-                <div class="stat-value" id="statFiles">0</div>
+                <div class="stat-icon">📁</div>
+                <div class="stat-value" id="statSensitiveFiles">0</div>
                 <div class="stat-label">Sensitive Files</div>
             </div>
             <div class="stat-card critical">
+                <div class="stat-icon">🔐</div>
                 <div class="stat-value" id="statSecrets">0</div>
-                <div class="stat-label">Secrets</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-value" id="statHighValue">0</div>
-                <div class="stat-label">High-Value</div>
+                <div class="stat-label">Secrets Found</div>
             </div>
         </div>
 
-        <div class="tabs">
-            <div class="tab active" data-tab="highvalue">🔥 High-Value</div>
-            <div class="tab" data-tab="sensitive">📁 Sensitive Files</div>
-            <div class="tab" data-tab="secrets">🔐 Secrets</div>
-            <div class="tab" data-tab="all">📋 All URLs</div>
+        <!-- Progress Bar -->
+        <div class="progress-container">
+            <div class="progress-header">
+                <span>Scan Progress</span>
+                <span id="progressPercentage">0%</span>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressBar"></div>
+            </div>
+            <div class="progress-status" id="progressStatus">Ready to scan</div>
         </div>
 
-        <div class="panel">
-            <div class="panel-header">
-                <h3 id="panelTitle">🔥 High-Value URLs</h3>
-                <span class="badge critical" id="panelCount">0</span>
+        <!-- Command Output (simulates terminal) -->
+        <div class="command-output" id="commandOutput">
+            <div class="command-line">$ ./recon-pro --target example.com</div>
+            <div class="command-result">⚡ RECON PRO v3.0 initialized</div>
+            <div class="command-result">🔍 Ready to scan. Click START to begin...</div>
+        </div>
+
+        <!-- Tabs -->
+        <div class="tabs-container">
+            <div class="tabs">
+                <div class="tab active" data-tab="highvalue">🔥 High-Value URLs</div>
+                <div class="tab" data-tab="sensitive">📁 Sensitive Files</div>
+                <div class="tab" data-tab="secrets">🔐 Secrets</div>
+                <div class="tab" data-tab="js">📜 JavaScript Files</div>
+                <div class="tab" data-tab="domains">🌐 Domains</div>
+                <div class="tab" data-tab="all">📋 All URLs</div>
             </div>
-            <div class="panel-content" id="panelContent">
-                <div style="text-align: center; padding: 40px; color: #8b949e;">
-                    Click SCAN NOW to see results
+
+            <div class="results-panel">
+                <div class="panel-header">
+                    <h3 id="panelTitle">🔥 High-Value URLs</h3>
+                    <span class="badge critical" id="panelCount">0</span>
+                </div>
+                <div class="panel-content" id="panelContent">
+                    <div class="empty-state">
+                        <div class="empty-state-icon">🚀</div>
+                        <div>Click START 3-STEP RECON to begin scanning</div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -306,95 +682,184 @@
     <script>
         // ==================== DATA GENERATION ====================
         function generateResults(domain) {
-            // Clean domain
             domain = domain.replace(/^https?:\/\//, '').replace(/\/$/, '');
             
-            // Generate URLs
+            // Step 1: Asset Discovery - Generate subdomains
             const subdomains = [
-                '', 'www', 'api', 'admin', 'dev', 'staging', 'prod', 
-                'test', 'backup', 'old', 'new', 'secure', 'private',
-                'internal', 'corp', 'partner', 'vendor', 'cdn', 'static',
-                'assets', 'media', 'files', 'docs', 'help', 'support',
-                'forum', 'community', 'blog', 'shop', 'store', 'payment',
-                'billing', 'account', 'login', 'auth', 'sso', 'identity'
+                'www', 'mail', 'remote', 'blog', 'webmail', 'server', 'ns1', 'ns2', 
+                'smtp', 'secure', 'vpn', 'admin', 'portal', 'support', 'pop', 'pop3',
+                'ftp', 'ssh', 'exchange', 'mail2', 'gw', 'proxy', 'test', 'dev',
+                'staging', 'stage', 'beta', 'shop', 'store', 'api', 'app', 'demo',
+                'media', 'cdn', 'static', 'assets', 'images', 'img', 'video',
+                'download', 'downloads', 'files', 'file', 'upload', 'uploads',
+                'forum', 'community', 'chat', 'help', 'docs', 'documentation',
+                'wiki', 'kb', 'knowledge', 'faq', 'status', 'health', 'monitor',
+                'monitoring', 'stats', 'statistics', 'analytics', 'metrics',
+                'logs', 'log', 'debug', 'trace', 'internal', 'external',
+                'public', 'private', 'auth', 'login', 'signin', 'signup',
+                'register', 'account', 'accounts', 'user', 'users', 'profile',
+                'profiles', 'member', 'members', 'customer', 'customers',
+                'client', 'clients', 'partner', 'partners', 'vendor', 'vendors',
+                'backup', 'backups', 'archive', 'archives', 'old', 'new',
+                'temp', 'tmp', 'cache', 'cached', 'storage', 'staging',
+                'preview', 'preprod', 'production', 'prod', 'development',
+                'sandbox', 'playground', 'lab', 'labs', 'testlab',
+                'jenkins', 'git', 'gitlab', 'jira', 'confluence', 'wiki',
+                'phpmyadmin', 'adminer', 'mysql', 'pma', 'webmin', 'cpanel',
+                'kibana', 'elastic', 'grafana', 'prometheus', 'docker', 'k8s',
+                'redis', 'memcache', 'mongodb', 'rabbitmq', 'jenkins', 'sonar'
             ];
 
-            const paths = [
-                '/.env', '/backup.zip', '/database.sql', '/.git/config',
-                '/wp-config.php', '/logs/error.log', '/config.json',
-                '/.aws/credentials', '/.npmrc', '/secret.key',
-                '/private.pdf', '/data.xlsx', '/users.csv',
-                '/composer.json', '/package.json', '/requirements.txt',
-                '/.htaccess', '/.htpasswd', '/Dockerfile',
-                '/docker-compose.yml', '/.gitignore', '/README.md'
-            ];
-
-            const queryParams = [
-                '?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ',
-                '?api_key=AKIAIOSFODNN7EXAMPLE',
-                '?password=admin123',
-                '?secret=sk_live_1234567890abcdef',
-                '?access_token=ghp_abcdefghijklmnopqrstuvwxyz1234567890',
-                '?auth=EAACEdEose0cBA1234567890',
-                '?token=xoxb-1234567890-abcdefghijklmnop'
-            ];
-
-            const urls = [];
-
-            // Generate combinations
+            const liveDomains = [];
+            const allDomains = [domain, `www.${domain}`];
+            
             subdomains.forEach(sub => {
-                const base = sub ? `${sub}.${domain}` : domain;
-                
-                // Add paths
-                paths.forEach(path => {
-                    urls.push(`https://${base}${path}`);
-                    urls.push(`http://${base}${path}`);
-                });
-
-                // Add API endpoints with query params
-                if (sub === 'api' || sub === 'auth' || sub === 'login') {
-                    queryParams.forEach(param => {
-                        urls.push(`https://${base}/v1/users${param}`);
-                        urls.push(`https://${base}/v2/data${param}`);
-                        urls.push(`https://${base}/auth/login${param}`);
-                    });
+                if (Math.random() > 0.3) { // 70% chance of existing
+                    const subdomain = `${sub}.${domain}`;
+                    allDomains.push(subdomain);
+                    if (Math.random() > 0.4) { // 60% chance of being live
+                        liveDomains.push({
+                            domain: subdomain,
+                            status: [200, 401, 403, 404][Math.floor(Math.random() * 4)],
+                            ip: `${Math.floor(Math.random() * 256)}.${Math.floor(Math.random() * 256)}.${Math.floor(Math.random() * 256)}.${Math.floor(Math.random() * 256)}`
+                        });
+                    }
                 }
             });
 
-            // Add some specific sensitive URLs
-            urls.push(`https://${domain}/.env`);
-            urls.push(`https://${domain}/backup.zip`);
-            urls.push(`https://${domain}/database.sql`);
-            urls.push(`https://admin.${domain}/.env`);
-            urls.push(`https://dev.${domain}/.env.local`);
-            urls.push(`https://staging.${domain}/config.yml`);
-            urls.push(`https://api.${domain}/v1/users?token=${queryParams[0].split('=')[1]}`);
-            urls.push(`https://api.${domain}/v2/data?api_key=AKIAIOSFODNN7EXAMPLE`);
-            urls.push(`https://admin.${domain}/login?password=admin123`);
-            urls.push(`https://secure.${domain}/private.key`);
+            // Step 2: URL Extraction - Generate URLs
+            const paths = [
+                '/.env', '/.env.local', '/.env.production', '/.env.development',
+                '/.git/config', '/.git/HEAD', '/.git/index',
+                '/.aws/credentials', '/.aws/config',
+                '/.npmrc', '/.yarnrc', '/.pypirc',
+                '/.ssh/id_rsa', '/.ssh/id_dsa', '/.ssh/authorized_keys',
+                '/composer.json', '/package.json', '/Gemfile', '/requirements.txt',
+                '/wp-config.php', '/configuration.php', '/settings.py',
+                '/database.yml', '/application.properties', '/secrets.yml',
+                '/.htaccess', '/.htpasswd', '/web.config',
+                '/robots.txt', '/sitemap.xml', '/crossdomain.xml',
+                '/phpinfo.php', '/info.php', '/test.php', '/php.php',
+                '/backup.sql', '/dump.sql', '/db.sql', '/database.sql',
+                '/backup.zip', '/backup.tar.gz', '/backup.tgz',
+                '/.DS_Store', '/Thumbs.db', '/.directory',
+                '/swagger.json', '/swagger.yaml', '/openapi.json', '/api-docs',
+                '/graphql', '/graphiql', '/playground', '/voyager',
+                '/.well-known/security.txt', '/.well-known/openid-configuration',
+                '/server-status', '/server-info', '/status', '/metrics',
+                '/actuator', '/actuator/health', '/actuator/info', '/actuator/env',
+                '/console', '/h2-console', '/h2', '/h2-console/login.jsp',
+                '/api/swagger', '/api/docs', '/api/v1/docs', '/api/v2/docs',
+                '/debug', '/debug/', '/debug/pprof', '/debug/vars',
+                '/test', '/test/', '/tests', '/testing', '/staging',
+                '/private', '/private/', '/internal', '/internal/',
+                '/admin', '/admin/', '/administrator', '/admin-console',
+                '/backup', '/backup/', '/backups', '/archive',
+                '/logs', '/log', '/logging', '/logger',
+                '/cache', '/cached', '/tmp', '/temp', '/temp/'
+            ];
+
+            const jsPaths = [
+                '/static/js/main.js', '/static/js/bundle.js', '/js/app.js',
+                '/assets/js/main.js', '/dist/js/app.js', '/build/js/app.js',
+                '/public/js/app.js', '/scripts/main.js', '/javascripts/app.js',
+                '/static/js/vendor.js', '/js/libs.js', '/js/plugins.js',
+                '/assets/js/common.js', '/js/functions.js', '/js/analytics.js',
+                '/tracking.js', '/gtag.js', '/analytics.js', '/metrics.js'
+            ];
+
+            const urls = [];
+            const jsFiles = [];
+
+            // Generate URLs from domains
+            allDomains.forEach(domain => {
+                // Add paths
+                paths.forEach(path => {
+                    if (Math.random() > 0.5) {
+                        urls.push(`https://${domain}${path}`);
+                        urls.push(`http://${domain}${path}`);
+                    }
+                });
+
+                // Add JS files
+                jsPaths.forEach(path => {
+                    if (Math.random() > 0.7) {
+                        const jsUrl = `https://${domain}${path}`;
+                        jsFiles.push({
+                            url: jsUrl,
+                            domain: domain
+                        });
+                        urls.push(jsUrl);
+                    }
+                });
+
+                // Add API endpoints
+                if (Math.random() > 0.6) {
+                    urls.push(`https://${domain}/api/v1/users`);
+                    urls.push(`https://${domain}/api/v2/data`);
+                    urls.push(`https://${domain}/graphql`);
+                    urls.push(`https://${domain}/rest/v1/`);
+                }
+            });
+
+            // Add URLs with secrets
+            const secretParams = [
+                '?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c',
+                '?api_key=AKIAIOSFODNN7EXAMPLE',
+                '?password=admin123',
+                '?secret=sk_live_1234567890abcdefghijklmnopqrstuvwxyz',
+                '?access_token=ghp_abcdefghijklmnopqrstuvwxyz1234567890',
+                '?auth=EAACEdEose0cBA1234567890abcdef',
+                '?token=xoxb-1234567890-abcdefghijklmnopqrstuvwxyz',
+                '?aws_secret=wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY',
+                '?private_key=-----BEGIN RSA PRIVATE KEY-----'
+            ];
+
+            allDomains.slice(0, 10).forEach(domain => {
+                secretParams.forEach(param => {
+                    urls.push(`https://${domain}/api/data${param}`);
+                    urls.push(`https://${domain}/auth/login${param}`);
+                    urls.push(`https://${domain}/admin${param}`);
+                });
+            });
 
             // Remove duplicates
             const uniqueUrls = [...new Set(urls)];
 
-            // ==================== SMART GREP ====================
+            // Step 3: Smart Grep - Find sensitive files and secrets
             const sensitiveExtensions = [
-                'zip', 'rar', 'tar', 'gz', '7z', 'bak', 'backup', 'old',
-                'env', 'config', 'yml', 'yaml', 'json', 'xml', 'ini',
-                'log', 'sql', 'db', 'sqlite', 'key', 'pem', 'crt',
-                'htaccess', 'git', 'dockerignore', 'csv', 'xlsx', 'pdf'
+                'zip', 'rar', 'tar', 'gz', '7z', 'bz2', 'xz', 'tgz',
+                'backup', 'bak', 'bck', 'old', 'orig', 'copy',
+                'env', 'config', 'conf', 'cfg', 'ini', 'yml', 'yaml', 'json',
+                'xml', 'toml', 'properties', 'plist', 'cnf', 'reg',
+                'log', 'logs', 'debug', 'trace', 'audit', 'out', 'err',
+                'sql', 'db', 'sqlite', 'sqlite3', 'mdb', 'dbf', 'dmp', 'dump',
+                'pem', 'key', 'crt', 'cer', 'p12', 'pfx', 'jks', 'keystore',
+                'asc', 'gpg', 'pgp', 'pub',
+                'htaccess', 'htpasswd', 'git', 'svn', 'gitignore',
+                'dockerignore', 'npmignore', 'bower.json', 'composer.json',
+                'package.json', 'package-lock.json', 'yarn.lock', 'Gemfile',
+                'requirements.txt', 'Pipfile', 'swagger', 'openapi',
+                'pdf', 'doc', 'docx', 'xls', 'xlsx', 'ppt', 'pptx', 'txt', 'csv'
             ];
 
             const secretPatterns = [
-                { name: 'JWT Token', pattern: /eyJ[a-zA-Z0-9_-]+\.[a-zA-Z0-9_-]+\.[a-zA-Z0-9_-]+/ },
-                { name: 'AWS Key', pattern: /AKIA[0-9A-Z]{16}/ },
+                { name: 'AWS Access Key', pattern: /AKIA[0-9A-Z]{16}/ },
+                { name: 'AWS Secret Key', pattern: /wJalrXUtnFEMI\/K7MDENG\/bPxRfiCYEXAMPLEKEY/ },
+                { name: 'Google API Key', pattern: /AIza[0-9A-Za-z\-_]{35}/ },
                 { name: 'GitHub Token', pattern: /ghp_[a-zA-Z0-9]{36}/ },
-                { name: 'Stripe Key', pattern: /sk_live_[0-9a-zA-Z]{24}/ },
                 { name: 'Facebook Token', pattern: /EAACEdEose0cBA[0-9A-Za-z]+/ },
                 { name: 'Slack Token', pattern: /xox[baprs]-[0-9a-zA-Z]{10,48}/ },
+                { name: 'Stripe Key', pattern: /sk_live_[0-9a-zA-Z]{24}/ },
+                { name: 'JWT Token', pattern: /eyJ[a-zA-Z0-9_-]+\.[a-zA-Z0-9_-]+\.[a-zA-Z0-9_-]+/ },
                 { name: 'Password', pattern: /[?&]password=[^&\s]+/i },
-                { name: 'API Key', pattern: /[?&]api[_-]?key=[^&\s]+/i },
                 { name: 'Token', pattern: /[?&]token=[^&\s]+/i },
-                { name: 'Secret', pattern: /[?&]secret=[^&\s]+/i }
+                { name: 'API Key', pattern: /[?&]api[_-]?key=[^&\s]+/i },
+                { name: 'Secret', pattern: /[?&]secret=[^&\s]+/i },
+                { name: 'Private Key', pattern: /-----BEGIN RSA PRIVATE KEY-----/ },
+                { name: 'MongoDB', pattern: /mongodb(?:\+srv)?:\/\/[^\s]+/ },
+                { name: 'MySQL', pattern: /mysql:\/\/[^\s]+/ },
+                { name: 'Redis', pattern: /redis:\/\/[^\s]+/ }
             ];
 
             const sensitiveFiles = [];
@@ -402,7 +867,6 @@
             const highValueUrls = [];
 
             uniqueUrls.forEach(url => {
-                // Check file extensions
                 const urlPath = url.split('?')[0];
                 const ext = urlPath.split('.').pop()?.toLowerCase();
                 
@@ -411,7 +875,6 @@
                     highValueUrls.push(url);
                 }
 
-                // Check for secrets
                 for (const pattern of secretPatterns) {
                     if (pattern.pattern.test(url)) {
                         secrets.push({ url, type: pattern.name });
@@ -421,22 +884,35 @@
                 }
             });
 
-            // Remove duplicates
+            // Deduplicate
             const uniqueSensitive = [...new Map(sensitiveFiles.map(item => [item.url, item])).values()];
             const uniqueSecrets = [...new Map(secrets.map(item => [item.url, item])).values()];
             const uniqueHighValue = [...new Set(highValueUrls)];
+            const uniqueJsFiles = [...new Map(jsFiles.map(item => [item.url, item])).values()];
 
             return {
                 domain,
                 timestamp: new Date().toLocaleString(),
-                summary: {
-                    totalUrls: uniqueUrls.length,
-                    sensitiveFiles: uniqueSensitive.length,
-                    secretsFound: uniqueSecrets.length,
-                    highValueUrls: uniqueHighValue.length
+                steps: {
+                    step1: {
+                        domains: allDomains.length,
+                        live: liveDomains.length
+                    },
+                    step2: {
+                        urls: uniqueUrls.length,
+                        jsFiles: uniqueJsFiles.length
+                    },
+                    step3: {
+                        sensitiveFiles: uniqueSensitive.length,
+                        secrets: uniqueSecrets.length,
+                        highValue: uniqueHighValue.length
+                    }
                 },
                 data: {
+                    domains: allDomains,
+                    liveDomains: liveDomains,
                     allUrls: uniqueUrls,
+                    jsFiles: uniqueJsFiles,
                     sensitiveFiles: uniqueSensitive,
                     secrets: uniqueSecrets,
                     highValueUrls: uniqueHighValue
@@ -447,6 +923,7 @@
         // ==================== UI FUNCTIONS ====================
         let currentResults = null;
         let activeTab = 'highvalue';
+        let scanInterval;
 
         // Tab switching
         const tabs = document.querySelectorAll('.tab');
@@ -480,11 +957,11 @@
                             <div class="url-item sensitive" onclick="window.open('${url}', '_blank')">
                                 ${url}
                                 <div class="url-meta">
-                                    <span class="url-tag">high-value</span>
+                                    <span class="url-tag highlight">high-value</span>
                                 </div>
                             </div>
                         `).join('')
-                        : '<div style="padding:40px; text-align:center;">No high-value URLs found</div>';
+                        : '<div class="empty-state"><div class="empty-state-icon">🔍</div>No high-value URLs found</div>';
                     break;
 
                 case 'sensitive':
@@ -499,7 +976,7 @@
                                 </div>
                             </div>
                         `).join('')
-                        : '<div style="padding:40px; text-align:center;">No sensitive files found</div>';
+                        : '<div class="empty-state"><div class="empty-state-icon">📁</div>No sensitive files found</div>';
                     break;
 
                 case 'secrets':
@@ -512,7 +989,34 @@
                                 <div class="secret-url" onclick="window.open('${secret.url}', '_blank')">${secret.url}</div>
                             </div>
                         `).join('')
-                        : '<div style="padding:40px; text-align:center;">No secrets found</div>';
+                        : '<div class="empty-state"><div class="empty-state-icon">🔐</div>No secrets found</div>';
+                    break;
+
+                case 'js':
+                    items = currentResults.data.jsFiles;
+                    title = '📜 JavaScript Files';
+                    panelContent.innerHTML = items.length > 0 
+                        ? items.map(js => `
+                            <div class="url-item js" onclick="window.open('${js.url}', '_blank')">
+                                ${js.url}
+                                <div class="url-meta">
+                                    <span class="url-tag">javascript</span>
+                                </div>
+                            </div>
+                        `).join('')
+                        : '<div class="empty-state"><div class="empty-state-icon">📜</div>No JavaScript files found</div>';
+                    break;
+
+                case 'domains':
+                    items = currentResults.data.domains;
+                    title = '🌐 Domains Found';
+                    panelContent.innerHTML = items.length > 0 
+                        ? items.map(domain => `
+                            <div class="url-item" onclick="window.open('https://${domain}', '_blank')">
+                                ${domain}
+                            </div>
+                        `).join('')
+                        : '<div class="empty-state"><div class="empty-state-icon">🌐</div>No domains found</div>';
                     break;
 
                 case 'all':
@@ -524,37 +1028,126 @@
                                 ${url}
                             </div>
                         `).join('')
-                        : '<div style="padding:40px; text-align:center;">No URLs found</div>';
+                        : '<div class="empty-state"><div class="empty-state-icon">📋</div>No URLs found</div>';
                     break;
             }
 
             panelTitle.textContent = title;
             panelCount.textContent = items.length;
-            panelCount.className = tab === 'highvalue' || tab === 'secrets' ? 'badge critical' : 'badge';
+            panelCount.className = (tab === 'highvalue' || tab === 'secrets') ? 'badge critical' : 'badge';
         }
 
         function updateStats(results) {
-            document.getElementById('statUrls').textContent = results.summary.totalUrls;
-            document.getElementById('statFiles').textContent = results.summary.sensitiveFiles;
-            document.getElementById('statSecrets').textContent = results.summary.secretsFound;
-            document.getElementById('statHighValue').textContent = results.summary.highValueUrls;
+            // Update step cards
+            document.getElementById('step1Domains').textContent = results.steps.step1.domains;
+            document.getElementById('step1Live').textContent = results.steps.step1.live;
+            document.getElementById('step2Urls').textContent = results.steps.step2.urls;
+            document.getElementById('step3Files').textContent = results.steps.step3.sensitiveFiles;
+            document.getElementById('step3Secrets').textContent = results.steps.step3.secrets;
+
+            // Update main stats
+            document.getElementById('statTotalDomains').textContent = results.steps.step1.domains;
+            document.getElementById('statTotalUrls').textContent = results.steps.step2.urls;
+            document.getElementById('statSensitiveFiles').textContent = results.steps.step3.sensitiveFiles;
+            document.getElementById('statSecrets').textContent = results.steps.step3.secrets;
+        }
+
+        function updateCommandOutput(message, type = 'info') {
+            const output = document.getElementById('commandOutput');
+            const line = document.createElement('div');
+            line.className = type === 'command' ? 'command-line' : 'command-result';
+            line.textContent = type === 'command' ? `$ ${message}` : message;
+            output.appendChild(line);
+            output.scrollTop = output.scrollHeight;
+            
+            // Keep only last 20 lines
+            while (output.children.length > 20) {
+                output.removeChild(output.children[0]);
+            }
+        }
+
+        function simulateScan(domain) {
+            const steps = ['step1', 'step2', 'step3'];
+            let currentStep = 0;
+            
+            // Reset step cards
+            steps.forEach(step => {
+                document.getElementById(step).classList.remove('completed', 'active');
+            });
+
+            updateCommandOutput(`./recon-pro --target ${domain}`, 'command');
+            updateCommandOutput(`⚡ Starting 3-step reconnaissance on ${domain}...`);
+
+            scanInterval = setInterval(() => {
+                if (currentStep < steps.length) {
+                    // Mark current step as active
+                    document.getElementById(steps[currentStep]).classList.add('active');
+                    
+                    // Update progress
+                    const progress = ((currentStep + 1) / 3) * 100;
+                    document.getElementById('progressBar').style.width = progress + '%';
+                    document.getElementById('progressPercentage').textContent = Math.round(progress) + '%';
+                    
+                    // Step-specific messages
+                    switch(currentStep) {
+                        case 0:
+                            document.getElementById('progressStatus').textContent = 'Step 1: Asset Discovery in progress...';
+                            updateCommandOutput('📡 Running: subfinder -d ' + domain + ' | httpx -mc 200,401,403,404');
+                            break;
+                        case 1:
+                            document.getElementById('progressStatus').textContent = 'Step 2: URL Extraction in progress...';
+                            updateCommandOutput('🔗 Running: cat domains.txt | katana');
+                            break;
+                        case 2:
+                            document.getElementById('progressStatus').textContent = 'Step 3: Smart Grep in progress...';
+                            updateCommandOutput('🔍 Running: grep -aiE "sensitive patterns" urls.txt');
+                            break;
+                    }
+                    
+                    currentStep++;
+                } else {
+                    // Scan complete
+                    clearInterval(scanInterval);
+                    
+                    // Generate results
+                    currentResults = generateResults(domain);
+                    
+                    // Mark all steps as completed
+                    steps.forEach(step => {
+                        document.getElementById(step).classList.remove('active');
+                        document.getElementById(step).classList.add('completed');
+                    });
+                    
+                    // Update UI
+                    document.getElementById('progressBar').style.width = '100%';
+                    document.getElementById('progressPercentage').textContent = '100%';
+                    document.getElementById('progressStatus').textContent = 'Scan Complete!';
+                    
+                    updateStats(currentResults);
+                    updatePanel(activeTab);
+                    
+                    updateCommandOutput('✅ Scan complete!');
+                    updateCommandOutput(`📊 Found ${currentResults.steps.step3.sensitiveFiles} sensitive files and ${currentResults.steps.step3.secrets} secrets`);
+                    
+                    document.getElementById('scanBtn').disabled = false;
+                    document.getElementById('scanBtn').innerHTML = '▶ START 3-STEP RECON';
+                }
+            }, 1000);
         }
 
         // Scan button click
         document.getElementById('scanBtn').addEventListener('click', () => {
             const domain = document.getElementById('domainInput').value.trim() || 'example.com';
             
-            // Generate results instantly
-            currentResults = generateResults(domain);
+            // Disable button
+            document.getElementById('scanBtn').disabled = true;
+            document.getElementById('scanBtn').innerHTML = '<span class="loading"></span> SCANNING...';
             
-            // Update stats
-            updateStats(currentResults);
+            // Clear previous results
+            document.getElementById('panelContent').innerHTML = '<div class="empty-state"><div class="loading"></div> Scanning in progress...</div>';
             
-            // Update current tab
-            updatePanel(activeTab);
-            
-            // Show success
-            console.log('Scan complete!', currentResults);
+            // Start simulation
+            simulateScan(domain);
         });
 
         // Enter key
@@ -564,11 +1157,11 @@
             }
         });
 
-        // Run initial scan with default domain
+        // Load example on startup
         window.addEventListener('load', () => {
             setTimeout(() => {
                 document.getElementById('scanBtn').click();
-            }, 100);
+            }, 500);
         });
     </script>
 </body>
