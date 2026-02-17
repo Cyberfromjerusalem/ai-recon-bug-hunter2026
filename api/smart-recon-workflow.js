@@ -128,10 +128,16 @@ function smartGrep(domain) {
         }
     });
 
+    // Remove duplicates
+    const uniqueSensitiveFiles = [...new Map(sensitiveFiles.map(item => [item.url, item])).values()];
+    const uniqueSecrets = [...new Map(secrets.map(item => [item.url, item])).values()];
+    const uniqueHighValueUrls = [...new Set(highValueUrls)];
+
     return {
-        sensitiveFiles: [...new Map(sensitiveFiles.map(item => [item.url, item])).values()],
-        secrets: [...new Map(secrets.map(item => [item.url, item])).values()],
-        highValueUrls: [...new Set(highValueUrls)]
+        sensitiveFiles: uniqueSensitiveFiles,
+        secrets: uniqueSecrets,
+        highValueUrls: uniqueHighValueUrls,
+        allUrls: exampleUrls
     };
 }
 
@@ -158,13 +164,15 @@ app.post('/api/smart-recon', (req, res) => {
             success: true,
             domain,
             timestamp: new Date().toISOString(),
+            duration: 1500, // Simulated duration in ms
             summary: {
+                totalUrls: findings.allUrls.length,
                 sensitiveFiles: findings.sensitiveFiles.length,
                 secretsFound: findings.secrets.length,
-                highValueUrls: findings.highValueUrls.length,
-                totalUrls: 50 // Example count
+                highValueUrls: findings.highValueUrls.length
             },
             data: {
+                allUrls: findings.allUrls,
                 sensitiveFiles: findings.sensitiveFiles,
                 secrets: findings.secrets,
                 highValueUrls: findings.highValueUrls
